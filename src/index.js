@@ -52,14 +52,14 @@ module.exports = function getZerosCount(number, base) {
   }
 
   for (const prop in primeFactors) {
-    let zerosForPF = powerOf(Number(prop), number, 1, 0);
-    zerosForPF = zerosForPF / primeFactors[prop];
-    zerosForPF = Math.floor(zerosForPF);
+    let zerosForPrimeFacctor = powerOf(Number(prop), number, 1, 0);
+    zerosForPrimeFacctor = zerosForPrimeFacctor / primeFactors[prop];
+    zerosForPrimeFacctor = Math.floor(zerosForPrimeFacctor);
 
     if (zerosCount === undefined) {
-      zerosCount = zerosForPF;
-    } else if (zerosCount > zerosForPF) {
-      zerosCount = zerosForPF;
+      zerosCount = zerosForPrimeFacctor;
+    } else if (zerosCount > zerosForPrimeFacctor) {
+      zerosCount = zerosForPrimeFacctor;
     }
   }
 
