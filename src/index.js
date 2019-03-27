@@ -2,10 +2,11 @@ module.exports = function getZerosCount(number, base) {
   "use strict";
 
   let i = 2; // smallest prime number
-  let j = base;
-  const primeFactors = {}; // prime factors for j will be here
-  let zerosCount; // for !number in j base system
+  let j = base; // base j system
+  const primeFactors = {}; // for j will be here
+  let zerosCount; // for number! in base j system
 
+  // Update prime factor power or create prime factor
   function updateProp(prop) {
     if (primeFactors[prop]) {
       primeFactors[prop] += 1;
@@ -16,6 +17,19 @@ module.exports = function getZerosCount(number, base) {
 
   function createProp(prop) {
     primeFactors[prop] = 1;
+  }
+
+  function powerOf(primeFactor, number, x, result) {
+    result += number / Math.pow(primeFactor, x);
+    result = Math.floor(result);
+
+    if (number / Math.pow(primeFactor, x) > 1) {
+      x++;
+
+      return powerOf(primeFactor, number, x, result);
+    }
+
+    return result;
   }
 
   do {
@@ -37,19 +51,6 @@ module.exports = function getZerosCount(number, base) {
       continue;
     }
   } while (i <= base);
-
-  function powerOf(primeFactor, number, x, result) {
-    result += number / Math.pow(primeFactor, x);
-    result = Math.floor(result);
-
-    if (number / Math.pow(primeFactor, x) > 1) {
-      x++;
-
-      return powerOf(primeFactor, number, x, result);
-    }
-
-    return result;
-  }
 
   for (const prop in primeFactors) {
     let zerosForPrimeFacctor = powerOf(Number(prop), number, 1, 0);
